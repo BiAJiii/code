@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const family = {
+            name:"一家亲",
+            members:[
+                'mon',
+                'dad',
+                'son',
+                'daughter'
+            ],
+
+            [Symbol.iterator](){
+                let _this = this;
+                let index = 0;
+                return {
+                    next:function(){
+                        if(index < _this.members.length){
+                            const result = {value:_this.members[index] , done: false};
+                            index++;
+                            return result;
+                        }
+                        else{
+                            return {value:'undefined' , done: true};
+                        }
+                    }
+
+                }
+            }
+        }
+
+        for(let v of family){
+            console.log(v);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+body {
+  height: 10px;
+  width: 20px;
+}
+
+.test, .test-info {
+  border: 10px;
+}
+
+.test-info {
+  background-color: aqua;
+}
+
+/*# sourceMappingURL=style.css.map */

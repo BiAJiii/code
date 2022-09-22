@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .result{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <button>发送请求</button>
+    <button>取消请求</button>
+    <div class="result"></div>
+    <script>
+        var btn = document.querySelectorAll('button');
+        var result = document.querySelector('.result');
+        let xhr = null;
+        //防止重复请求
+        let isSending = false;
+
+        btn[0].onclick = function(){
+            if(isSending){
+                xhr.abort();
+            }
+            xhr = new XMLHttpRequest();
+            isSending = true;
+            xhr.timeout = 2000;
+            xhr.ontimeout = function(){
+                alert("网络异常");
+            }
+        
+            xhr.open('get','http://127.0.0.1:8000/delay');
+            xhr.send();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState===4){
+                    isSending = false;
+                    if(xhr.status >=200 && xhr.status <300){
+                        result.innerHTML = xhr.response;
+                    }
+                }
+
+            }
+        }
+        //取消请求
+        btn[1].onclick = function(){
+            xhr.abort();
+        }
+
+    </script>
+</body>
+</html>

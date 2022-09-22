@@ -1,0 +1,9 @@
+@import "base";
+.test{
+    border: 10px;
+}
+
+.test-info{
+    @extend .test;
+    background-color: aqua;
+}
